@@ -44,130 +44,144 @@
 // export default Banner;
 //uporrer text ta without toggle
 
-
-import React, { useEffect, useState } from 'react';
-import SimpleWhiteBoard from 'simple-white-board';
-import './Whiteboard.css'; // External CSS file for styling
+import React, { useEffect, useState } from "react";
+import SimpleWhiteBoard from "simple-white-board";
+import "./Whiteboard.css"; // External CSS file for styling
 
 const Banner = () => {
-    const [isEraserActive, setIsEraserActive] = useState(false);
-    const [brushSize, setBrushSize] = useState(5);
-    const [brushColor, setBrushColor] = useState('#000000');
-    const [whiteBoard, setWhiteBoard] = useState(null);
-    const canvasRef = React.createRef();
+  const [isEraserActive, setIsEraserActive] = useState(false);
+  const [brushSize, setBrushSize] = useState(5);
+  const [brushColor, setBrushColor] = useState("#000000");
+  const [whiteBoard, setWhiteBoard] = useState(null);
+  const canvasRef = React.createRef();
 
-    useEffect(() => {
-        const canvas = canvasRef.current;
+  useEffect(() => {
+    const canvas = canvasRef.current;
 
-        if (canvas) {
-            // Set logical size (coordinate system)
-            const logicalWidth = 1200;
-            const logicalHeight = 800;
+    if (canvas) {
+      // Set logical size (coordinate system)
+      const logicalWidth = 1200;
+      const logicalHeight = 800;
 
-            // Set the physical display size to match
-            canvas.style.width = `${logicalWidth}px`;
-            canvas.style.height = `${logicalHeight}px`;
+      // Set the physical display size to match
+      canvas.style.width = `${logicalWidth}px`;
+      canvas.style.height = `${logicalHeight}px`;
 
-            // Set the canvas resolution to match the logical size
-            canvas.width = logicalWidth;
-            canvas.height = logicalHeight;
+      // Set the canvas resolution to match the logical size
+      canvas.width = logicalWidth;
+      canvas.height = logicalHeight;
 
-            // Initialize SimpleWhiteBoard with the logical size
-            const whiteBoardInstance = new SimpleWhiteBoard(canvas, {
-                backgroundColor: '#ffffff',
-                width: logicalWidth,
-                height: logicalHeight,
-            });
-            setWhiteBoard(whiteBoardInstance);
+      // Initialize SimpleWhiteBoard with the logical size
+      const whiteBoardInstance = new SimpleWhiteBoard(canvas, {
+        backgroundColor: "#ffffff",
+        width: logicalWidth,
+        height: logicalHeight,
+      });
+      setWhiteBoard(whiteBoardInstance);
 
-            // Set initial brush size and color (manually, via canvas context)
-            const context = canvas.getContext('2d');
-            context.lineWidth = brushSize;
-            context.strokeStyle = brushColor;
+      // Set initial brush size and color (manually, via canvas context)
+      const context = canvas.getContext("2d");
+      context.lineWidth = brushSize;
+      context.strokeStyle = brushColor;
 
-            // Handle eraser toggle
-            const toggleEraser = () => {
-                setIsEraserActive(!isEraserActive);
-                whiteBoardInstance.setEraser(isEraserActive);
-            };
+      // Handle eraser toggle
+      const toggleEraser = () => {
+        setIsEraserActive(!isEraserActive);
+        whiteBoardInstance.setEraser(isEraserActive);
+      };
 
-            // Attach the toggleEraser function to the button
-            const eraserButton = document.getElementById('eraser-button');
-            eraserButton.addEventListener('click', toggleEraser);
-        }
-    }, [isEraserActive, brushSize, brushColor]); // Re-run when brushSize or brushColor changes
+      // Attach the toggleEraser function to the button
+      const eraserButton = document.getElementById("eraser-button");
+      eraserButton.addEventListener("click", toggleEraser);
+    }
+  }, [isEraserActive, brushSize, brushColor]); // Re-run when brushSize or brushColor changes
 
-    // Update brush size and color dynamically
-    const handleBrushSizeChange = (size) => {
-        setBrushSize(size);
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        context.lineWidth = size; // Update line width dynamically
-    };
+  // Update brush size and color dynamically
+  const handleBrushSizeChange = (size) => {
+    setBrushSize(size);
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.lineWidth = size; // Update line width dynamically
+  };
 
-    const handleBrushColorChange = (color) => {
-        setBrushColor(color);
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        context.strokeStyle = color; // Update stroke color dynamically
-    };
+  const handleBrushColorChange = (color) => {
+    setBrushColor(color);
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.strokeStyle = color; // Update stroke color dynamically
+  };
 
-    const handleClearCanvas = () => {
-        const canvas = canvasRef.current;
-        const context = canvas.getContext('2d');
-        context.clearRect(0, 0, canvas.width, canvas.height);
-    };
+  const handleClearCanvas = () => {
+    const canvas = canvasRef.current;
+    const context = canvas.getContext("2d");
+    context.clearRect(0, 0, canvas.width, canvas.height);
+  };
 
-    const handleUndo = () => {
-        whiteBoard.undo();
-    };
+  const handleUndo = () => {
+    whiteBoard.undo();
+  };
 
-    const handleRedo = () => {
-        whiteBoard.redo();
-    };
+  const handleRedo = () => {
+    whiteBoard.redo();
+  };
 
-    const handleSaveCanvas = () => {
-        const canvas = canvasRef.current;
-        const dataUrl = canvas.toDataURL('image/png');
-        const link = document.createElement('a');
-        link.href = dataUrl;
-        link.download = 'whiteboard.png';
-        link.click();
-    };
+  const handleSaveCanvas = () => {
+    const canvas = canvasRef.current;
+    const dataUrl = canvas.toDataURL("image/png");
+    const link = document.createElement("a");
+    link.href = dataUrl;
+    link.download = "whiteboard.png";
+    link.click();
+  };
 
-    return (
-        <div className="banner">
-          
-            <div className="controls">
-                <div className="brush-controls">
-                    <label>Brush Size: </label>
-                    <input
-                        type="range"
-                        min="1"
-                        max="20"
-                        value={brushSize}
-                        onChange={(e) => handleBrushSizeChange(e.target.value)}
-                    />
-                    <label>Color: </label>
-                    <input
-                        type="color"
-                        value={brushColor}
-                        onChange={(e) => handleBrushColorChange(e.target.value)}
-                    />
-                </div>
-                <div className="action-butto flex flex-row">
-                    <button className='w-8 h-8' onClick={handleClearCanvas}>Clear</button>
-                    {/* <button onClick={handleUndo}>Undo</button>
-                    <button onClick={handleRedo}>Redo</button> */}
-                    <button onClick={handleSaveCanvas}>Save</button>
-                    <button id="eraser-button">Toggle Eraser</button>
-                </div>
-            </div>
-            <canvas ref={canvasRef}></canvas> {/* Canvas element for the whiteboard */}
+  return (
+    <div className="banner">
+      <div className="controls">
+        <div className="brush-controls">
+          <label>Brush Size: </label>
+          <input
+            type="range"
+            min="1"
+            max="20"
+            value={brushSize}
+            onChange={(e) => handleBrushSizeChange(e.target.value)}
+          />
+          <label>Color: </label>
+          <input
+            type="color"
+            className="w-32"
+            value={brushColor}
+            onChange={(e) => handleBrushColorChange(e.target.value)}
+          />
         </div>
-    );
+        <div className="action-butto flex flex-row space-x-4">
+          <button
+            className="w-20 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            onClick={handleClearCanvas}
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="relative z-10">Clear</span>
+          </button>
+          <button
+            className="w-20 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            onClick={handleSaveCanvas}
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="relative z-10">Save</span>
+          </button>
+          <button
+            className="w-40 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            id="eraser-button"
+          >
+            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="relative z-10">Toggle Eraser</span>
+          </button>
+        </div>
+      </div>
+      <canvas ref={canvasRef}></canvas>{" "}
+      {/* Canvas element for the whiteboard */}
+    </div>
+  );
 };
 
 export default Banner;
-
-
