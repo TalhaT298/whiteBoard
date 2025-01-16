@@ -138,7 +138,7 @@ const Banner = () => {
     <div className="banner">
       <div className="controls">
         <div className="brush-controls">
-          <label>Brush Size: </label>
+          <label className="text-white">Brush Size</label>
           <input
             type="range"
             min="1"
@@ -146,7 +146,7 @@ const Banner = () => {
             value={brushSize}
             onChange={(e) => handleBrushSizeChange(e.target.value)}
           />
-          <label>Color: </label>
+          <label className="text-white">Color</label>
           <input
             type="color"
             className="w-32"
@@ -156,24 +156,27 @@ const Banner = () => {
         </div>
         <div className="action-butto flex flex-row space-x-4">
           <button
-            className="w-20 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            className="w-20 h-12 relative bg-black text-white rounded-full overflow-hidden group focus:outline-none active:outline-none hover:bg-white"
             onClick={handleClearCanvas}
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="absolute inset-0 rounded-md bg-gradient-to-r from-transparent via-white to-transparent opacity-50"></span>
+            <span className="absolute inset-[2px] bg-black rounded-md border-2 border-transparent"></span>
             <span className="relative z-10">Clear</span>
           </button>
           <button
-            className="w-20 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            className="w-20 h-12 relative bg-black text-white rounded-full overflow-hidden group focus:outline-none active:outline-none hover:bg-white"
             onClick={handleSaveCanvas}
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="absolute inset-0 rounded-md bg-gradient-to-r from-transparent via-white to-transparent opacity-50"></span>
+            <span className="absolute inset-[2px] bg-black rounded-md border-2 border-transparent"></span>
             <span className="relative z-10">Save</span>
           </button>
           <button
-            className="w-40 h-12 bg-black text-white border-2 border-white rounded-md shadow-lg relative overflow-hidden group"
+            className="w-40 h-12 relative bg-black text-white rounded-full overflow-hidden group focus:outline-none active:outline-none hover:bg-white"
             id="eraser-button"
           >
-            <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent opacity-50 group-hover:animate-shimmer"></span>
+            <span className="absolute inset-0 rounded-md bg-gradient-to-r from-transparent via-white to-transparent opacity-50"></span>
+            <span className="absolute inset-[2px] bg-black rounded-md border-2 border-transparent"></span>
             <span className="relative z-10">Toggle Eraser</span>
           </button>
         </div>
