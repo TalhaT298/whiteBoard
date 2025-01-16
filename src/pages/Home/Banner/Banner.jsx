@@ -137,7 +137,7 @@ const Banner = () => {
 
     return (
         <div className="banner">
-            <h1>Interactive Whiteboard</h1>
+          
             <div className="controls">
                 <div className="brush-controls">
                     <label>Brush Size: </label>
@@ -155,10 +155,10 @@ const Banner = () => {
                         onChange={(e) => handleBrushColorChange(e.target.value)}
                     />
                 </div>
-                <div className="action-buttons">
-                    <button onClick={handleClearCanvas}>Clear</button>
-                    <button onClick={handleUndo}>Undo</button>
-                    <button onClick={handleRedo}>Redo</button>
+                <div className="action-butto flex flex-row">
+                    <button className='w-8 h-8' onClick={handleClearCanvas}>Clear</button>
+                    {/* <button onClick={handleUndo}>Undo</button>
+                    <button onClick={handleRedo}>Redo</button> */}
                     <button onClick={handleSaveCanvas}>Save</button>
                     <button id="eraser-button">Toggle Eraser</button>
                 </div>
