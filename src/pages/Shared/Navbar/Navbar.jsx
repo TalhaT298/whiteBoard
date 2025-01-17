@@ -1,6 +1,7 @@
 import React from "react";
 import logo from "../../../../src/assets/logo.png"
 import { ImMan } from "react-icons/im";
+import './IconMovement.css';
 const Navbar = () => {
   return (
     <div className="navbar ">
@@ -10,7 +11,9 @@ const Navbar = () => {
       <div className="flex">
         <ul className="flex">
           <li>
-          <ImMan className="w-8 h-8"/>
+          <div className="icon-container">
+      <ImMan className="moving-icon w-8 h-8 text-white" />
+    </div>
           </li>
           
         </ul>

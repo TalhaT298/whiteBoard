@@ -1,0 +1,26 @@
+@keyframes moveRightLeft {
+    0% {
+      transform: translateX(0);
+    }
+    25% {
+      transform: translateX(70px); /* Move to the right */
+    }
+    50% {
+      transform: translateX(0); /* Back to original position */
+    }
+    75% {
+      transform: translateX(-100px); /* Move to the left */
+    }
+    100% {
+      transform: translateX(0); /* Back to original position */
+    }
+  }
+  
+  .moving-icon {
+    animation: moveRightLeft 8s infinite;
+  }
+  
+  .icon-container {
+    display: inline-block;
+  }
+  
