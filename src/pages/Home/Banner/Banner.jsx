@@ -61,7 +61,7 @@ const Banner = () => {
     if (canvas) {
       // Set logical size (coordinate system)
       const logicalWidth = 1200;
-      const logicalHeight = 800;
+      const logicalHeight = 600;
 
       // Set the physical display size to match
       canvas.style.width = `${logicalWidth}px`;
@@ -140,12 +140,13 @@ const Banner = () => {
         <div className="brush-controls">
           <label className="text-white">Brush Size</label>
           <input
-            type="range"
-            min="1"
-            max="20"
-            value={brushSize}
-            onChange={(e) => handleBrushSizeChange(e.target.value)}
-          />
+          type="range"
+          min="1"
+          max="20"
+          value={brushSize}
+          onChange={(e) => handleBrushSizeChange(e.target.value)}
+          className="w-full h-2 bg-white rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-black"
+        />
           <label className="text-white">Color</label>
           <input
             type="color"
@@ -181,7 +182,7 @@ const Banner = () => {
           </button>
         </div>
       </div>
-      <canvas ref={canvasRef}></canvas>{" "}
+      <canvas className="" ref={canvasRef}></canvas>{" "}
       {/* Canvas element for the whiteboard */}
     </div>
   );
