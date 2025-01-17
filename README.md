@@ -10,9 +10,6 @@ Sketchify is a collaborative whiteboard application where users can draw, erase,
 - **Canvas Clearing**: Start fresh by clearing the entire canvas.
 - **Save as Image**: Download your masterpiece as a PNG image.
 
-## Demo
-
-![Sketchify Demo](https://example.com/demo-image-url) <!-- Replace with an actual demo screenshot -->
 
 ## Installation
 
